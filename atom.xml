@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.z-xx.top</id>
     <title>风间的blog</title>
-    <updated>2020-02-26T01:05:51.257Z</updated>
+    <updated>2020-12-19T14:06:43.352Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.z-xx.top"/>
     <link rel="self" href="https://blog.z-xx.top/atom.xml"/>
@@ -10,6 +10,19 @@
     <logo>https://blog.z-xx.top/images/avatar.png</logo>
     <icon>https://blog.z-xx.top/favicon.ico</icon>
     <rights>All rights reserved 2020, 风间的blog</rights>
+    <entry>
+        <title type="html"><![CDATA[迫于成年人的烦恼]]></title>
+        <id>https://blog.z-xx.top/post/GF5cWjWHN/</id>
+        <link href="https://blog.z-xx.top/post/GF5cWjWHN/">
+        </link>
+        <updated>2020-12-19T13:43:15.000Z</updated>
+        <content type="html"><![CDATA[<p>昨天过完了第 26 个生日，想想离‘退休’年龄差的也不是很多了。从毕业到现在，在同一家公司已经工作了快 4 个年头了，也完成了很多人生中的大事。是时候脱离自己的舒适区，摆脱现在的困状。</p>
+<p><a href="https://imgchr.com/i/rUm2RS"><img src="https://s3.ax1x.com/2020/12/19/rUm2RS.md.jpg" alt="rUm2RS.md.jpg" loading="lazy"></a><br>
+补上一张生日🎂的照片，哈哈哈哈，朴素的不行的蛋糕。</p>
+<p>最近又重启了找工作的计划，但是很多知识点在复习的时候记得很清楚，和别人说的时候却又很难表达完整。所以重新开启这个开启了好几次也没什么内容的 blog， 来做一些笔记。<br>
+以上，希望能够一直更新。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Level.1 - 开发环境]]></title>
         <id>https://blog.z-xx.top/post/0pu9Mlq6_/</id>
