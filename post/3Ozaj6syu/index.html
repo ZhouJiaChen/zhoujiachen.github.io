@@ -42,7 +42,19 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%8E-spring-%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%BC%80%E5%A7%8B">从 Spring 容器启动开始</a>
+<ul>
+<li><a href="#this">this()</a></li>
+<li><a href="#refresh">refresh()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -87,27 +99,91 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">关于</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">聊聊 Spring 容器</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2019-01-25 / 1 min read
+          2020-12-19 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <blockquote>
-<p>※请保持房间明亮，并年满18岁。🤝</p>
-</blockquote>
-<h2 style="text-align:center">为了防止世界被破坏，</h2>
-<h2 style="text-align:center">为了保护世界的和平，</h2>
-<h2 style="text-align:center">贯彻爱与真实的邪恶。</h2>
+          <p>不得不说，作为一个 curd 程序员，离开了 Spring 的容器，还能不能好好干活是个大问题。<br>
+说到 Spring 容器，就不得不提 Spring IOC（哈哈，貌似应该反过来说）。</p>
+<!-- more -->
+<p>先看下 Spring 容器启动的大致流程。</p>
+<ol>
+<li>首先，Spring 会通过注册 6 个必须的 <code>RootBeanDefinition</code>，主要是一些 <code>PostProcessor</code>。</li>
+<li>接下来会对初始化 Property Source 和 验证一些必须的属性。</li>
+<li>然后是准备这个容器中需要用到的 beanFactory。</li>
+<li>紧接着调用了 beanFactory 中 postProcessor。</li>
+<li>接着注册 Bean 的 postProcessor。</li>
+<li>initMessageSource 处理国际化相关。</li>
+<li>初始化当前容器的事件监听广播器。</li>
+<li>接着向广播器注册监听器。</li>
+<li>然后就是最关键的实例化对象和设置属性相关的操作。</li>
+<li>最后发布 <code>ContextRefreshedEvent</code> 通知完成容器刷新。</li>
+</ol>
+<p>还是直接上图把，主要涉及到 <code>AbstractApplicationContext</code> 下的 <code>refresh()</code><br>
+<a href="https://imgchr.com/i/rU1tw4"><img src="https://s3.ax1x.com/2020/12/19/rU1tw4.md.png" alt="Spring 容器启动" loading="lazy"></a></p>
+<h2 id="从-spring-容器启动开始">从 Spring 容器启动开始</h2>
+<p>以 <code>AnnotationConfigApplicationContext</code> 为例</p>
+<p>通过以下来创建 Application 容器</p>
+<pre><code class="language-java">	@Test
+	void contextLifeCycle() {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+		context.getBean(&quot;testBean&quot;);
+	}
+</code></pre>
+<pre><code class="language-java">	/**
+	 * Create a new AnnotationConfigApplicationContext, deriving bean definitions
+	 * from the given component classes and automatically refreshing the context.
+	 * @param componentClasses one or more component classes &amp;mdash; for example,
+	 * {@link Configuration @Configuration} classes
+	 */
+	public AnnotationConfigApplicationContext(Class&lt;?&gt;... componentClasses) {
+		this();
+		register(componentClasses);
+		refresh();
+	}
+</code></pre>
+<h3 id="this">this()</h3>
+<p>在 <code>this()</code> 中，注入了 6 个 RootBeanDefinition</p>
+<ul>
+<li>ConfigurationClassPostProcessor 用于处理 @Configuration 注解的类。</li>
+<li>AutowiredAnnotationBeanPostProcessor 处理 @Autowired 注解的类。</li>
+<li>CommonAnnotationBeanPostProcessor 处理 @Resource 等 JSR-250 定义的相关注解注解的类。</li>
+<li>PersistenceAnnotationBeanPostProcessor JPA 相关。</li>
+<li>EventListenerMethodProcessor  注册 EventListener 相关。</li>
+<li>DefaultEventListenerFactory</li>
+</ul>
+<p>这些 <code>RootBeanDefinition</code> 是一些 <code>BeanFactoryPostProcessor</code></p>
+<h3 id="refresh">refresh()</h3>
+<p>然后进入到最重要的 <code>refresh()</code> 方法。<br>
+// To-Do</p>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://blog.z-xx.top/tag/v7QrCxXlu/">
+            <span class="flex-auto">Spring</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://blog.z-xx.top/tag/AVaN024G5/">
+            <span class="flex-auto">Java</span>
+          </a>
         
 
 
         <div class="flex justify-between py-8">
           
 
+          
+            <div class="next-post">
+              <a href="https://blog.z-xx.top/post/GF5cWjWHN/">
+                <h3 class="post-title">
+                  迫于成年人的烦恼
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
           
         </div>
 
